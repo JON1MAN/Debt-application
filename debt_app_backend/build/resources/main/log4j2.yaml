@@ -1,0 +1,32 @@
+Configuration:
+  status: debug
+
+  appender:
+    Console:
+      name: ConsoleAppender
+      target: SYSTEM_OUT
+      PatternLayout:
+        Pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+
+    file:
+      name: FileAppender
+      fileName: "/Users/amarchuk/Documents/logs/app.log"
+      PatternLayout:
+        pattern: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+
+  Loggers:
+    Root:
+      level: debug
+      AppenderRef:
+        - ref: ConsoleAppender
+        - ref: debt_app
+
+    Logger:
+      - name: com.debptapp
+        level: debug
+        additivity: false
+        AppenderRef:
+          - ref: ConsoleAppender
+          - ref: FileAppender
+          - ref: RollingFileAppender
+          - ref: debt_app
